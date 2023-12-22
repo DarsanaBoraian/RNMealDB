@@ -1,16 +1,38 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import ApiHelper from "./src/helpers/ApiHelper";
-import ApiTodoScreen from "./src/screens/ApiTodoScreen";
 import MealScreen from "./src/screens/MealScreen";
+import HomeScreen from "./src/screens/HomeScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from "@react-navigation/native-stack";
+
+export type RootStackParamList = {
+  Home: undefined;
+  Meals: undefined;
+};
+
+export interface PageProps<T extends keyof RootStackParamList> {
+  // T is one of Home|PasswordAdd
+  navigation: NativeStackNavigationProp<RootStackParamList, T>;
+}
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={{ marginTop: 20 }}>
-      <MealScreen />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: "Welcome" }}
+        />
+        <Stack.Screen name="Meals" component={MealScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
