@@ -1,12 +1,14 @@
+import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import ApiHelper from "./src/helpers/ApiHelper";
+import ApiTodoScreen from "./src/screens/ApiTodoScreen";
+import MealScreen from "./src/screens/MealScreen";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <ApiHelper />
+    <View style={{ marginTop: 20 }}>
+      <MealScreen />
       <StatusBar style="auto" />
     </View>
   );
